@@ -13,3 +13,14 @@ begin
 rescue LoadError
   puts "Jeweler, or one of its dependencies, is not available. Install with gem install jeweler."
 end
+
+require 'rspec/core/rake_task'
+
+desc 'Default: run specs.'
+task :default => :spec
+
+desc 'Run the specs'
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ["-c", "-f progress", "-r ./spec/spec_helper.rb", "--format documentation"]
+  t.pattern = 'spec/**/*_spec.rb'
+end
